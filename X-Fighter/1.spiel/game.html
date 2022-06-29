@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-Fighter</title>
+
+    <Style>
+        canvas{
+            background-color: blue;
+        }
+    </Style>
+
+    <script>
+        let KEY_SPACE = false;
+        let KEY_UP = false;
+        let KEY_DOWN = false;
+        let canvas;
+        let ctx;
+        let backgroundImage = new Image
+
+        let rocket = {
+            x: 100,
+            y: 200,
+            width: 100,
+            height: 60,
+            src: 'img/Rocket.png'
+        }
+
+        let ufo = {
+            x: 500,
+            y: 200,
+            width: 100,
+            height: 40,
+            src: 'img/ufo.png'
+        }
+        
+        document.onkeydown = function(e) {
+            if (e.keycode == 32) { //leertaste gedrückt
+                 KEY_SPACE = true;
+            }
+        }
+
+        
+        document.onkeydown = function(e) {
+            if (e.keycode == 38) { //leertaste gedrückt
+                 KEY_UP = true;
+            }
+        }
+
+        
+        document.onkeydown = function(e) {
+            if (e.keycode == 40) { //leertaste gedrückt
+                 KEY_DOWN = true;
+            }
+        }
+
+        
+        document.onkeyup = function(e) {
+                    if (e.keycode == 32) { //leertaste losgelassen
+                 KEY_SPACE = false;
+            }
+        }
+
+        document.onkeyup = function(e) {
+                    if (e.keycode == 38) { //leertaste losgelassen
+                 KEY_UP = false;
+            }
+        }
+
+        document.onkeyup = function(e) {
+                    if (e.keycode == 40) { //leertaste losgelassen
+                 KEY_DOWN = false;
+            }
+        }
+
+        function startgame(){
+            canvas = document.getElementById('canvas')
+            ctx = canvas.getContext('2d')
+            loadImages();
+            setInterval(update, 1000 / 25);
+            draw();
+
+
+        }
+
+        function update(){
+
+            if(KEY_UP) {
+                rocket.y -= 1;
+            }
+        }
+
+
+        function loadImages() {
+            backgroundImage.src = 'img/Background.png';
+
+            rocket.img = new Image();
+            rocket.img.src = rocket.src;
+
+            ufo.img = new Image();
+            ufo.img.src = ufo.src;
+
+        }
+
+        function draw(){
+            ctx.drawImage(backgroundImage, -150, -200);
+            ctx.drawImage(rocket.img, rocket.x, rocket.y, rocket.width, rocket.height);
+            
+
+
+            requestAnimationFrame(draw)
+        }
+
+    </script>
+</head>
+<body onload="startgame()">
+    <canvas id="canvas" width="1280" height="720"></canvas>
+    
+    <style>
+        
+        
+    </style>
+</body>
+</html>
